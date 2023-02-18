@@ -35,3 +35,16 @@ services:
       MYSQL_ROOT_PASSWORD: 'passwrod'
     volumes:
       - cocode_local_mysql_data:/var/lib/mysql:z
+
+  ui:
+    build:
+      context: .
+      dockerfile: ./compose/dev/ui/Dockerfile
+    image: cocode_dev_ui
+    container_name: cocode_dev_ui
+    depends_on:
+      - django
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend:z
