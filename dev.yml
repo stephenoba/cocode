@@ -1,7 +1,7 @@
 version: '3'
 
 volumes:
-  cocode_local_mysql_data: {}
+  cocode_dev_postgres_data: {}
 
 services:
   django: &django
@@ -12,29 +12,23 @@ services:
     container_name: cocode_dev_django
     platform: linux/x86_64
     depends_on:
-      - mysql
+      - postgres
     volumes:
       - .:/app:z
     env_file:
       - ./.envs/.django
-      - ./.envs/.mysql
+      - ./.envs/.postgres
     ports:
       - "8000:8000"
-    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+    command: /start
 
-  mysql:
-    image: mysql:8.0.32
-    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
-    # (this is just an example, not intended to be a production configuration)
-    # command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_DATABASE: 'cocode_db'
-      MYSQL_USER: 'cocode_user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'passwrod'
+  postgres:
+    image: postgres:14
+    container_name: cocode_dev_postgres
     volumes:
-      - cocode_local_mysql_data:/var/lib/mysql:z
+      - cocode_dev_postgres_data:/var/lib/postgresql/data:Z
+    env_file:
+      - ./.envs/.postgres
 
   ui:
     build:

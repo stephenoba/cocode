@@ -11,7 +11,8 @@ ARG BUILD_ENVIRONMENT=dev
 # Install apt packages
 RUN apt-get update && apt-get install --no-install-recommends -y \
   # dependencies for building Python packages
-  build-essential
+  build-essential \
+  libpq-dev
 
 # Requirements are installed here to ensure they will be cached.
 COPY ./requirements .
@@ -34,7 +35,7 @@ ENV BUILD_ENV ${BUILD_ENVIRONMENT}
 WORKDIR ${APP_HOME}
 
 # Install required system dependencies
-RUN apt-get update \
+RUN apt-get update && apt-get install -y libpq-dev build-essential\
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*
@@ -47,6 +48,14 @@ COPY --from=python-build-stage /usr/src/app/wheels  /wheels/
 RUN pip install --no-cache-dir --no-index --find-links=/wheels/ /wheels/* \
 	&& rm -rf /wheels/
 
-COPY . .
+COPY ./compose/dev/django/entrypoint /entrypoint
+RUN sed -i 's/\r$//g' /entrypoint
+RUN chmod +x /entrypoint
 
-EXPOSE 8000
+COPY ./compose/dev/django/start /start
+RUN sed -i 's/\r$//g' /start
+RUN chmod +x /start
+
+COPY . ${APP_HOME}
+
+ENTRYPOINT [ "/entrypoint" ]
