@@ -1,7 +1,0 @@
-# PostgreSQL
-# ------------------------------------------------------------------------------
-POSTGRES_HOST='postgres'
-POSTGRES_PORT=5432
-POSTGRES_DB='cocode_db'
-POSTGRES_USER='ZhRXdIFaCJImoZodkWlpJszgQOuhcOqz'
-POSTGRES_PASSWORD='JYSAyttrwoFYtNZbptm7WKD2onshushE0So9jGQm3Y2KkQG0z8kWSbXH7aImQmrr'
