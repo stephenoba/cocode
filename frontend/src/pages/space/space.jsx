@@ -1,6 +1,7 @@
 import React from 'react';
 import "./space.scss"
 
+import Navbar from '../../components/navbar/navbar';
 import CodeEditor from '../../components/codeeditor/codeeditor';
 import FileTree from '../../components/filetree/filetree';
 
@@ -8,10 +9,11 @@ const Space = () => {
     return (
         <div className='space'>
             <div className='navbar-container'>
-                Navbar
+                <Navbar/>
             </div>
             <div className='environment'>
                 <div className='editor-container'>
+                    <div className='controls'>Environment Controls</div>
                     <CodeEditor/>
                 </div>
                 <div className='filetree-container'>
