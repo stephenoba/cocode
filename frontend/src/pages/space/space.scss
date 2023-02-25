@@ -1,16 +1,10 @@
 .space {
-    background-color: #777;
 
     .environment {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         grid-auto-rows: 300px;
         gap: 10px;
-
-        div {
-            border: 1px solid black;
-            padding: 5px;
-        }
 
         .editor-container {
             background-color: #333;
@@ -21,6 +15,14 @@
                 display: flex;
                 justify-content: space-between;
             }
+        }
+
+        .filetree-container {
+            border: 3px solid red;
+        }
+
+        .chat-container {
+            border: 3px solid red;
         }
     }
 }

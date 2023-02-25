@@ -1,8 +1,8 @@
 import React from 'react';
 import "./space.scss"
 
-import Editor from '../../components/editor/editor';
-import ThemeSelect from '../../components/themeselect/themeselect';
+import CodeEditor from '../../components/codeeditor/codeeditor';
+import FileTree from '../../components/filetree/filetree';
 
 const Space = () => {
     return (
@@ -12,16 +12,10 @@ const Space = () => {
             </div>
             <div className='environment'>
                 <div className='editor-container'>
-                    <div className='titlebar'>
-                        <div className='breadcrumb'>{"This > is > a > breadcrumb"}</div>
-                        <div className='theme-container'>
-                            <ThemeSelect/>
-                        </div>
-                    </div>
-                    <Editor/>
+                    <CodeEditor/>
                 </div>
-                <div className='doctree-container'>
-                    Document system
+                <div className='filetree-container'>
+                    <FileTree className="filetree"/>
                 </div>
                 <div className='chat-container'>
                     Chat
