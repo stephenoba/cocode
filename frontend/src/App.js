@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Dashboard from './pages/dashboard/dashboard';
 import Space from './pages/space/space';
 
 function App() {
@@ -8,7 +9,10 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path="/">
-        <Route index element={<Space />} />
+        <Route index element={<Dashboard />} />
+        <Route path='space'>
+          <Route path=':spaceCode' element={<Space />}/>
+        </Route>
       </Route>
     </Routes>
     </BrowserRouter>

@@ -13,7 +13,7 @@ export default function FileTree() {
             aria-label="file system navigator"
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ChevronRightIcon />}
-            sx={{ height: 290, flexGrow: 1, maxWidth: 500, overflowY: 'auto' }}
+            sx={{ height: 270, flexGrow: 1, maxWidth: 500, overflowY: 'auto' }}
             className='filetree'
             >
             <TreeItem nodeId="1" label="Home">
