@@ -1,3 +1,4 @@
+import os
 from .base import *  # noqa                                                 
 from .base import env
 
@@ -11,3 +12,17 @@ SECRET_KEY = env(
     "DJANGO_SECRET_KEY",
     default='django-insecure-(x7then57v7nz##*f7m*0=+jpaba($0u+3^k&(co9i%ys%)n+@'
 )
+
+if not env('USE_DOCKER', default=0):
+    # quick fix for no docker support
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': str(BASE_DIR / 'db.sqlite3'),
+        }
+    }
+else:
+    # Database
+    # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+    DATABASES = {"default": env.db("DATABASE_URL")}
+    DATABASES["default"]["ATOMIC_REQUESTS"] = True
