@@ -1,10 +1,14 @@
+:root {
+    --general-color: grey;
+}
+
 .navbar {
     height: 50px;
     border-bottom: 0.5px solid rgb(227, 227, 227);
     display: flex;
     align-items: center;
     font-size: 14px;
-    color: grey;
+    color: var(--general-color);
     position: sticky;
     top: 0;
 

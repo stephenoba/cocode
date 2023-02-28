@@ -10,7 +10,7 @@ function App() {
     <Routes>
       <Route path="/">
         <Route index element={<Dashboard />} />
-        <Route path='space'>
+        <Route path='spaces'>
           <Route path=':spaceCode' element={<Space />}/>
         </Route>
       </Route>
