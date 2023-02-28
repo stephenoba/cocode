@@ -18,6 +18,7 @@ const CodeEditor = ({files, file, openedFiles, onOpen, onClose}) => {
                 openedFiles.map(
                     (f) => (
                       <button
+                        className='code-tab'
                         key={f.id}
                         disabled={f.name === file.name}
                         onClick={() => onOpen(f)}>

@@ -6,6 +6,9 @@ import Navbar from '../../components/navbar/navbar';
 import CodeEditor from '../../components/codeeditor/codeeditor';
 import FileBrowser from '../../components/filebrowser/filebrowser';
 
+import InfoIcon from '@mui/icons-material/Info';
+import PeopleIcon from '@mui/icons-material/People';
+
 const files = [
     {
         id: 2,
@@ -108,7 +111,13 @@ const Space = () => {
             </div>
             <div className='environment'>
                 <div className='editor-container'>
-                    <div className='controls'>Environment Controls</div>
+                    <div className='titlebar'>
+                        <div className='space-info'><InfoIcon className='icon'/></div>
+                        <div className='controls'>
+                            <PeopleIcon className='icon'/>
+                            <button>End/Leave</button>
+                        </div>
+                    </div>
                     <CodeEditor
                         files={files}
                         file={file}

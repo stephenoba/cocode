@@ -1,13 +1,11 @@
-.editor {
-    border: none;
-    width: 95%;
-    min-height: 300px;
-    padding: 10px;
-    resize: none;
-    background-color: #333;
-  }
+.code-tab {
+  border: none;
+  width: 150px;
+  font-size: 16px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 
-  .close {
-    cursor: pointer;
-    color: red;
+  &:disabled {
+    color: #333;
   }
+}
