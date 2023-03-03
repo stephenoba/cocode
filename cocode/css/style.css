@@ -1,0 +1,429 @@
+/********* General CSS *********/
+body {
+    font-size: 16px;
+    font-weight: 200;
+    letter-spacing: .5px;
+    color: #ffffff;
+    background: #000000;
+    font-family: 'Raleway', sans-serif;
+}
+
+a {
+    color: #dddddd;
+    transition: .3s;
+}
+
+a:hover,
+a:active,
+a:focus {
+    color: #ffffff;
+    outline: none;
+    text-decoration: none;
+}
+
+.btn {
+    transition: .3s;
+}
+
+.btn:focus {
+    box-shadow: none;
+}
+
+/********** Layout CSS *********/
+
+.left-container,
+.right-container {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    padding: 0;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: gray;
+    left: 0;
+}
+
+.left-container {
+    background: #77212e;
+}
+
+.left-container::-webkit-scrollbar,
+.right-container::-webkit-scrollbar {
+    width: 5px;
+}
+
+.left-container::-webkit-scrollbar-track,
+.right-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.1);
+}
+
+.left-container::-webkit-scrollbar-thumb,
+.right-container::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    outline: 1px solid slategrey;
+    border-radius: 7px
+}
+
+@media (max-width: 991.98px) {
+    .left-container {
+        display: none;
+    }
+}
+
+/********* Static edge *********/
+.p-image {
+    height: 30vh;
+    text-align: center;
+    background: #77212e;
+    -webkit-clip-path: polygon(100% 0, 100% 100%, 84% 98%, 68% 100%, 51% 98%, 34% 100%, 17% 98%, 0 100%, 0 0);
+    clip-path: polygon(100% 0, 100% 100%, 84% 98%, 68% 100%, 51% 98%, 34% 100%, 17% 98%, 0 100%, 0 0);
+}
+
+.p-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.p-content {
+    text-align: center;
+}
+
+.p-content .p-title {
+    margin: 30px 0 20px 0;
+    font-size: 60px;
+    font-weight: 100;
+    letter-spacing: 3px;
+}
+
+.p-content .p-title a {
+    color: #ffffff;
+}
+
+.p-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.p-content ul li {
+    padding: 5px 0;
+    font-size: 16px;
+    font-weight: 200;
+    border-top: 1px solid #9B1B30;
+}
+
+.p-content ul li:last-child {
+    border-bottom: 1px solid #9B1B30;
+}
+
+.p-content .btn {
+    margin: 30px 0;
+    padding: 10px 30px;
+    font-size: 22px;
+    font-weight: 200;
+    border: 1px solid #9B1B30;
+    border-radius: 30px;
+}
+
+.p-content .btn:hover {
+    background: #9B1B30;
+}
+
+.p-content .btn span {
+    font-family: arial;
+}
+
+/********** Header CSS *********/
+.header {
+    position: relative;
+    padding: 90px 0;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, .5)), url(../img/header-bg.jpg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-clip-path: polygon(100% 0, 100% 100%, 84% 98%, 68% 100%, 51% 98%, 34% 100%, 17% 98%, 0 100%, 0 0);
+    clip-path: polygon(100% 0, 100% 100%, 84% 98%, 68% 100%, 51% 98%, 34% 100%, 17% 98%, 0 100%, 0 0);
+    text-align: center;
+    z-index: 1;
+}
+
+.header h2 {
+    color: #ffffff;
+    font-size: 55px;
+    font-weight: 100;
+    line-height: 80px;
+    margin-bottom: 20px;
+}
+
+.header h2 span {
+    font-weight: 400;
+}
+
+.header ul {
+    margin: 0;
+    padding: 0 0 30px 0;
+    list-style: none;
+}
+
+.header ul li {
+    margin-bottom: 5px;
+    font-size: 22px;
+    font-weight: 200;
+    color: #ffffff;
+}
+
+.header .btn {
+    padding: 7px 30px;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 200;
+    border: 1px solid #ffffff;
+    border-radius: 30px;
+}
+
+.header .btn:hover {
+    background: #9B1B30;
+    border-color: #9B1B30;
+}
+/***** Section Header CSS ******/
+.section-header {
+    position: relative;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+}
+
+.section-header::after {
+    content: '';
+    position: absolute;
+    width: 100px;
+    height: 2px;
+    left: calc(50% - 50px);
+    bottom: 0;
+    background: #000000;
+}
+
+.section-header p {
+    margin: 0;
+    color: #9B1B30;
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.section-header h1 {
+    margin: 0;
+    font-size: 45px;
+    font-weight: 100;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    text-align: center;
+}
+
+@media (max-width: 575.98px) {
+    .section-header h1 {
+        font-size: 45px;
+    }
+}
+/********** About CSS **********/
+#about {
+    position: relative;
+    padding: 30px 15px;
+    background: #9B1B30;
+    text-align: center;
+}
+
+#about p {
+    color: #dddddd;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+}
+
+#about p a:hover {
+    color: #dddddd;
+}
+
+
+
+/********* Feature CSS *********/
+#feature {
+    position: relative;
+    padding: 30px 15px 30px 15px;
+    background: #2c3035;
+}
+
+#feature .product-feature {
+    position: relative;
+    width: 100%;
+    float: left;
+    margin-bottom: 30px;
+}
+
+#feature .product-feature:last-child {
+    margin: 0;
+}
+
+#feature .product-icon {
+    position: relative;
+    width: 60px;
+    height: inherit;
+    float: left;
+}
+
+#feature .product-icon i {
+    color: #000000;
+    font-size: 40px;
+    margin-top: 5px;
+}
+
+#feature .product-content {
+    position: relative;
+    width: calc(100% - 60px);
+    float: left;
+}
+
+#feature .product-feature h2 {
+    font-size: 22px;
+    font-weight: 200;
+}
+
+#feature .product-feature p {
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+#feature .product-img {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+#feature .product-img img {
+    width: 100%;
+}
+
+@media (max-width: 767.98px) {
+    #feature .product-img img {
+        margin: 45px 0;
+    }
+}
+/******* Developers CSS ********/
+#developer {
+    position: relative;
+    padding: 30px 15px;
+    background: #9B1B30;
+}
+
+#developer .col-md-6:first-child p {
+    text-align: left;
+}
+
+#developer .col-md-6:last-child p {
+    text-align: right;
+}
+
+@media (max-width: 767.98px) {
+    #developer .col-md-6:first-child p,
+    #developer .col-md-6:last-child p {
+        text-align: center;
+    }
+}
+
+#developer p {
+    color: #dddddd;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+}
+
+
+#developer p a:hover {
+    color: #dddddd;
+}
+/********** Contact CSS ********/
+#contact {
+    position: relative;
+    padding: 30px 15px;
+    background: #2c3035;
+    text-align: center;
+}
+
+#contact .contact-inner h2 {
+    font-size: 45px;
+    font-weight: 100;
+    margin-bottom: 30px;
+}
+
+#contact .contact-inner i {
+    display: inline-block;
+    width: 75px;
+    height: 75px;
+    margin-bottom: 10px;
+    padding: 22px 0;
+    text-align: center;
+    font-size: 30px;
+    color: #ffffff;
+    background: #9B1B30;
+    border-radius: 80px;
+}
+
+#contact .contact-inner p {
+    font-size: 30px;
+    font-weight: 200;
+    margin-bottom: 30px;
+}
+@media(max-width: 575.98px) {
+    #contact .contact-inner h2 {
+        font-size: 30px;
+    }
+    
+    #contact .contact-inner i {
+        width: 50px;
+        height: 50px;
+        padding: 13px 0;
+        font-size: 22px;
+    }
+    
+    #contact .contact-inner p {
+        font-size: 24px;
+    }
+}
+/********** Footer CSS *********/
+#footer {
+    position: relative;
+    padding: 30px 15px;
+    background: #9B1B30;
+}
+
+#footer .col-md-6:first-child p {
+    text-align: left;
+}
+
+#footer .col-md-6:last-child p {
+    text-align: right;
+}
+
+@media (max-width: 767.98px) {
+    #footer .col-md-6:first-child p,
+    #footer .col-md-6:last-child p {
+        text-align: center;
+    }
+}
+
+#footer p {
+    color: #dddddd;
+    font-size: 16px;
+    font-weight: 300;
+    margin: 0;
+}
+
+#footer p a {
+    color: #ffffff;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+#footer p a:hover {
+    color: #dddddd;
+}
