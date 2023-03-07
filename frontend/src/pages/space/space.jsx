@@ -83,19 +83,30 @@ const files = [
 const openedFiles = [];
 
 
+const getSpaceName = () => {
+    return window.location.pathname.split("/")[2];
+}
+
 const Space = () => {
     const [file, setFile] = useState(null);
     const [cwd, setCWD] = useState(files[0]);
+    const spaceName = getSpaceName();
 
     const handleOpenFile = (file) => {
         if (file.isDirectory) {
             setCWD(file);
         } else {
-            setFile(file);
             if (!file.isOpen){
                 file.isOpen = true;
                 openedFiles.push(file);
             }
+            const cachedFile = localStorage.getItem(spaceName + file.name)
+            if (!cachedFile) {
+                localStorage.setItem(spaceName + file.name, JSON.stringify(file))
+            } else {
+                file = JSON.parse(cachedFile)
+            }
+            setFile(file)
         }
     }
 
@@ -124,6 +135,7 @@ const Space = () => {
                         openedFiles={openedFiles}
                         onOpen={handleOpenFile}
                         onClose={handleCoseFile}
+                        spaceName={spaceName}
                     />
                 </div>
                 <div className='filetree-container'>

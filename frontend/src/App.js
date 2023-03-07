@@ -12,6 +12,7 @@ function App() {
         <Route index element={<Dashboard />} />
         <Route path='spaces'>
           <Route path=':spaceCode' element={<Space />}/>
+          <Route path=':spaceCode/:fileName' element={<Space />}/>
         </Route>
       </Route>
     </Routes>

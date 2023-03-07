@@ -22,6 +22,10 @@ services:
       - "8000:8000"
     command: /start
 
+  redis:
+    image: redis:6
+    container_name: cocode_dev_redis
+
   postgres:
     image: postgres:14
     container_name: cocode_dev_postgres
