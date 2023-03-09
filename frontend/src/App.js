@@ -7,7 +7,7 @@ import { AuthProvider } from './context/AuthContext';
 
 import HomePage from './pages/homepage/HomePage';
 import Login from './pages/login/login';
-import Register from './pages/register/register';
+import Register from './pages/login/register';
 import Dashboard from './pages/dashboard/dashboard';
 import Space from './pages/space/space';
 

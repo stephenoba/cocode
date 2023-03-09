@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import AuthContext from "../../context/AuthContext";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+
+import './login.scss'
 
 const Login = () => {
   const { user, loginUser } = useContext(AuthContext);
@@ -16,15 +18,16 @@ const Login = () => {
       {
         user ? <Navigate to="/dashboard" />
         : (
-          <form onSubmit={handleSubmit}>
-            <h1>Login </h1>
-            <hr />
-            <label htmlFor="username">Username</label>
-            <input type="text" id="username" placeholder="Enter Username" />
-            <label htmlFor="password">Password</label>
-            <input type="password" id="password" placeholder="Enter Password" />
-            <button type="submit">Login</button>
-          </form>
+          <div className="login-page">
+            <div className="form">
+              <form className="login-form" onSubmit={handleSubmit}>
+                <input id="username" type="text" placeholder="username"/>
+                <input id="password" type="password" placeholder="password"/>
+                <button>login</button>
+              </form>
+              <p className="message">Don't have an account? <Link to="/register">Register</Link></p>
+            </div>
+          </div>
         )
       }
     </section>

@@ -3,6 +3,8 @@ from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework import viewsets, generics
+from rest_framework.permissions import AllowAny
+from django.db.models import Q
 
 from space.models import Space
 
@@ -16,6 +18,8 @@ def ping(request):
     return Response({"message": "Hello, world!"})
 
 class AuthTokenView(ObtainAuthToken):
+    permission_classes = (AllowAny, )
+
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -31,7 +35,7 @@ class SpaceViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         user = self.request.user
-        queryset.filter(owner=user)
+        queryset.filter(Q(members__user=user))
         return queryset
     
     def perform_create(self, serializer):
