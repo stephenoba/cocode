@@ -7,7 +7,7 @@ class Space(models.Model):
     """
     Space Model"""
     code = models.CharField(max_length=32, default=uuid_to_str(), primary_key=True, db_index=True)
-    owner = models.ForeignKey("users.User", related_name="space", on_delete=models.SET_NULL, null=True)
+    owner = models.OneToOneField("users.User", related_name="space", on_delete=models.SET_NULL, null=True)
     members = models.ManyToManyField('Member', through='SpaceMember')
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -2,6 +2,11 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
+from rest_framework import viewsets, generics
+
+from space.models import Space
+
+from .serializers import SpaceSerializer
 
 
 @api_view(['GET', 'POST'])
@@ -17,3 +22,17 @@ class AuthTokenView(ObtainAuthToken):
         user = serializer.validated_data['user']
         token, _ = Token.objects.get_or_create(user=user)
         return Response({'token': token.key, 'user': user.id})
+    
+
+class SpaceViewSet(viewsets.ModelViewSet):
+    queryset = Space.objects.all()
+    serializer_class = SpaceSerializer
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        user = self.request.user
+        queryset.filter(owner=user)
+        return queryset
+    
+    def perform_create(self, serializer):
+        serializer.save()
