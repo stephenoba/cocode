@@ -44,12 +44,14 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
+    'django_extensions',
 ]
 
 LOCAL_APPS = [
     "backend.users",
     "backend.space",
-    "api",
+    "backend.file_browser",
+    "backend.api",
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
