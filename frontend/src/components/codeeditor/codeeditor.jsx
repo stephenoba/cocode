@@ -1,5 +1,6 @@
 import React from 'react';
 import "./codeeditor.scss";
+import AuthContext from "../../context/AuthContext";
 
 import Editor from "@monaco-editor/react";
 import useWebSocket from 'react-use-websocket';
@@ -11,6 +12,7 @@ import { WS_URL } from '../../services/BaseService';
 
 
 const CodeEditor = ({files, file, openedFiles, onOpen, onClose, spaceName}) => {
+  const { user } = React.useContext(AuthContext);
   const fileToEdit = file || {name: "", value: ""};
   const roomName = spaceName + "/" + fileToEdit.name;
   const { lastJsonMessage, sendJsonMessage } = useWebSocket(WS_URL + roomName, {
@@ -26,6 +28,7 @@ const CodeEditor = ({files, file, openedFiles, onOpen, onClose, spaceName}) => {
     onOpen(cachedFile)
     sendJsonMessage({
       type: 'content_change',
+      user_id: user,
       content: value,
     });
   }

@@ -6,16 +6,23 @@ from rest_framework import viewsets, generics
 from rest_framework.permissions import AllowAny
 from django.db.models import Q
 
-from space.models import Space
+from space.models import Space, Member
 
 from .serializers import SpaceSerializer
 
 
-@api_view(['GET', 'POST'])
-def ping(request):
+@api_view(['POST'])
+def join_space(request):
     if request.method == 'POST':
-        return Response({"message": "Got some data!", "data": request.data})
-    return Response({"message": "Hello, world!"})
+        space_qs = Space.objects.filter(code=request.data.get("code"))
+        if space_qs:
+            space = space_qs[0]
+            if space.owner != request.user and request.user not in space.members.all():
+                member, _ = Member.objects.get_or_create(user=request.user, scope=Member.ScopeType.VIEWER)
+                space.members.add(member)
+            data = SpaceSerializer(space).data
+            return Response(data=data, status=200)
+        return Response({"error": "Not found"}, status=404)
 
 class AuthTokenView(ObtainAuthToken):
     permission_classes = (AllowAny, )
@@ -35,7 +42,8 @@ class SpaceViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = super().get_queryset()
         user = self.request.user
-        queryset.filter(Q(members__user=user))
+        print(user)
+        queryset = queryset.filter(Q(members__user=user) | Q(owner=user))
         return queryset
     
     def perform_create(self, serializer):

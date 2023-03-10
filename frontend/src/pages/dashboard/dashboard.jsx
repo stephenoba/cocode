@@ -1,15 +1,19 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import { Modal } from '@mui/material';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
 import { useNavigate } from 'react-router-dom';
+import AuthContext from "../../context/AuthContext";
 
 import Navbar from '../../components/navbar/navbar';
 
-import { pingServer } from '../../services/SpaceService';
+import { joinSpace } from '../../services/SpaceService';
 
 import './dashboard.scss';
 
@@ -29,25 +33,37 @@ const style = {
     gap: 2,
 };
 
-async function testAPI(data) {
-    const res = await pingServer(data);
-    return res.data.data;
+async function join(data, token) {
+    const res = await joinSpace(data, token);
+    if (data === res.code) {
+        return res.code;
+    }
 }
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
+    const [spaces, setSpaces] = useState(null)
     const [codeInputValue, setCodeInputValue] = useState('');
+    const { authToken } = useContext(AuthContext);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
     const navigate = useNavigate();
+    useEffect(() => {
+        fetch('api/v1/spaces', {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json', 'Authorization': `Token ${authToken.token}`},
+        })
+        .then(resp => resp.json())
+        .then(data => setSpaces(data))
+    }, [authToken])
 
     const handleCodeInputChange = (e) => {
         setCodeInputValue(e.target.value);
     }
-
-    async function handleJoinSpace() {
-        const code = await testAPI(codeInputValue);
+    
+    async function handleJoinSpace(spaceCode) {
+        const code = await join(spaceCode, authToken.token);
         navigate(`/spaces/${code}`);
     }
     
@@ -67,10 +83,35 @@ const Dashboard = () => {
                             Join a Space
                         </Typography>
                         <TextField fullWidth id="outlined-basic" label="Code" variant="outlined" onChange={handleCodeInputChange}/>
-                        <Button type='submit' variant='outlined' color='success' onClick={handleJoinSpace}>Join</Button>
+                        <Button type='submit' variant='outlined' color='success' onClick={() => (handleJoinSpace(codeInputValue))}>Join</Button>
                     </Box>
                 </Modal>
                 <Button variant='outlined'>Create a Space</Button>
+            </div>
+            <div>
+                {
+                    spaces ? (
+                        spaces.map((space) => (
+                            <Card variant='outlined' key={space.code} sx={{ minWidth: 275 }}>
+                                <CardContent>
+                                    <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                                        {space.owner}
+                                    </Typography>
+                                    <Typography variant="h5" component="div">
+                                        {space.code}
+                                    </Typography>
+                                </CardContent>
+                                <CardActions>
+                                    <Button
+                                        onClick={() => (handleJoinSpace(space.code))}
+                                        size="small">Open</Button>
+                                </CardActions>
+                            </Card>
+                        ))
+                    ) : (
+                        <h1>No Current Spaces</h1>
+                    )
+                }
             </div>
         </div>
     )

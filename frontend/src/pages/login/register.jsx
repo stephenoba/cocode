@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import { Navigate, Link } from "react-router-dom";
 
+import HomeNavbar from "../../components/homenavbar/homeNavbar";
+
 import './login.scss'
 
 const Register = () => {
@@ -17,6 +19,7 @@ const Register = () => {
 
   return (
     <section>
+      <HomeNavbar/>
       {
         user ? <Navigate to="/dashboard" />
         : (

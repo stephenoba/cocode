@@ -6,8 +6,11 @@ import LanguageIcon from '@mui/icons-material/Language';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import { useContext } from "react";
+import AuthContext from "../../context/AuthContext";
 
 const Navbar = () => {
+    const { user, logoutUser } = useContext(AuthContext);
     return (
         <div className="navbar">
             <div className="wrapper">
@@ -31,6 +34,13 @@ const Navbar = () => {
                     <div className="item">
                         <DarkModeIcon className="icon"/>
                     </div>
+                    { user ? (
+                        <div className="item">
+                            <button onClick={logoutUser}>Logout</button>
+                        </div>
+                    ) : (
+                        <div></div>
+                    ) }
                     <div className="item">
                         <img 
                         src="https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500" 

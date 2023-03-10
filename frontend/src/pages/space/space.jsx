@@ -83,14 +83,10 @@ const files = [
 const openedFiles = [];
 
 
-const getSpaceName = () => {
-    return window.location.pathname.split("/")[2];
-}
-
 const Space = () => {
     const [file, setFile] = useState(null);
     const [cwd, setCWD] = useState(files[0]);
-    const spaceName = getSpaceName();
+    const [ spaceName, setSpaceName ] = useState(() => window.location.pathname.split("/")[2]);
 
     const handleOpenFile = (file) => {
         if (file.isDirectory) {
